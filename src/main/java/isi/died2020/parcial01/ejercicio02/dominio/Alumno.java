@@ -26,6 +26,11 @@ public class Alumno {
 	}
 
 
+	public List<Examen> getExamenes() {
+		return examenes;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

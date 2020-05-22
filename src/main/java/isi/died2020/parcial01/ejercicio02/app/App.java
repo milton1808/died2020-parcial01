@@ -89,9 +89,19 @@ public class App {
 
 
 		
-		sistema.inscribirAlumnoCursada(prof1, a1, m1,2020);
+		try {
+			sistema.inscribirAlumnoCursada(prof1, a1, m1,2020);
+		} catch (noSeGuardoLaInscripcionException e) {
+			System.out.println(e.getMessage());
+		} catch (noAproboLasCorrelativasException e) {
+			System.out.println(e.getMessage());
+		}
 
-		sistema.inscribirAlumnoExamen(prof1, a1, m1);
+		try {
+			sistema.inscribirAlumnoExamen(prof1, a1, m1);
+		} catch (noSeGuardoElExamenException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 

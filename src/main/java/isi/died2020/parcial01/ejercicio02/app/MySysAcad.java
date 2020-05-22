@@ -17,15 +17,18 @@ public interface MySysAcad {
 	 * crea una nueva instancia de Inscripcion y 
 	 * asigna la inscripcion a la lista de inscripciones del alumno, 
 	 * de la materia y del docente
+	 * @throws noSeGuardoLaInscripcionException 
+	 * @throws noAproboLasCorrelativasException 
 	 */
-	public void inscribirAlumnoCursada(Docente d,Alumno a, Materia m,Integer cicloLectivo);
+	public void inscribirAlumnoCursada(Docente d,Alumno a, Materia m,Integer cicloLectivo) throws noSeGuardoLaInscripcionException, noAproboLasCorrelativasException;
 
 	/**
 	 * crea una nueva instancia de Inscripcion y 
 	 * asigna la inscripcion a la lista de inscripciones del alumno, 
 	 * de la materia y del docente
+	 * @throws noSeGuardoElExamenException 
 	 */
-	public void inscribirAlumnoExamen(Docente d,Alumno a, Materia m);
+	public void inscribirAlumnoExamen(Docente d,Alumno a, Materia m) throws noSeGuardoElExamenException;
 	
 
 }
