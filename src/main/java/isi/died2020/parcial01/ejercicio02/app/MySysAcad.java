@@ -1,5 +1,7 @@
 package isi.died2020.parcial01.ejercicio02.app;
 
+
+
 import isi.died2020.parcial01.ejercicio02.dominio.*;
 
 
@@ -29,6 +31,10 @@ public interface MySysAcad {
 	 * @throws noSeGuardoElExamenException 
 	 */
 	public void inscribirAlumnoExamen(Docente d,Alumno a, Materia m) throws noSeGuardoElExamenException;
+	
+	public Double promedioAprobados(Materia m);
+	
+	
 	
 
 }

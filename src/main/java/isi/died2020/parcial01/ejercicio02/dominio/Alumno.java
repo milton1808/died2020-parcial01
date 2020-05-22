@@ -20,6 +20,15 @@ public class Alumno {
 	}
 	
 	
+	
+	
+	public List<Inscripcion> getMateriasCursadas() {
+		return materiasCursadas;
+	}
+
+
+
+
 	public Alumno(String nombre) {
 		this();
 		this.nombre = nombre;

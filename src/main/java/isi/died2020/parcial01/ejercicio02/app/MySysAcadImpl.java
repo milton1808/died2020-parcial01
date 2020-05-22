@@ -2,11 +2,14 @@ package isi.died2020.parcial01.ejercicio02.app;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 import isi.died2020.parcial01.ejercicio02.db.BaseDeDatos;
 import isi.died2020.parcial01.ejercicio02.db.BaseDeDatosExcepcion;
 import isi.died2020.parcial01.ejercicio02.dominio.*;
+import isi.died2020.parcial01.ejercicio02.dominio.Inscripcion.Estado;
 
 
 public class MySysAcadImpl implements MySysAcad {
@@ -73,6 +76,40 @@ public class MySysAcadImpl implements MySysAcad {
 			throw new noSeGuardoElExamenException();
 			
 		}
+	}
+	
+	public void registrarNota(Examen e, int nota) {
+		e.setNota(nota);
+		ArrayList<Inscripcion> in = new ArrayList<Inscripcion>();
+		
+		if(nota >=6){
+			//buscamos las inscripciones del alumno a la materia del examen
+			for(Inscripcion ins : e.getAlumno().getMateriasCursadas()) {
+				if(ins.getMateria().equals(e.getMateria())) in.add(ins);
+			}
+			
+			//actualizamos la ultima incripcion a PROMOCIONADO
+			in.sort((in1,in2)-> in1.getCicloLectivo().compareTo(in2.getCicloLectivo()));
+			in.get(in.size()-1).setEstado(Estado.PROMOCIONADO);
+			
+		}
+	}
+
+
+	@Override
+	public Double promedioAprobados(Materia m) {
+		 OptionalDouble prom = m.getExamenes().stream().filter(ex -> ex.getNota()>=6).mapToInt(ex -> ex.getNota()).average();
+		 
+		 return prom.getAsDouble();
+		
+	}
+	
+	public List<Alumno> inscriptos(Materia m, Integer ciclo){
+		List<Alumno> alumnos = new ArrayList<Alumno>();
+		alumnos = m.getInscripciones().stream().filter(in -> in.getCicloLectivo().equals(ciclo)).map(in-> in.getInscripto()).distinct().sorted((a1,a2) -> a1.getNombre().compareTo(a2.getNombre())).collect(Collectors.toList());
+		
+		return alumnos;
+			
 	}
 	
 
